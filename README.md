@@ -17,21 +17,7 @@
 ## 机器人FRP内网穿透
 ###### 机器人必须实时进行监测和控制，而很多情况下获取机器人IP必须进入路由器管理界面，或者插上显示器，所以采用FRP内网穿透，保证通信畅通。
 ###### 采用了阿里云学生机平台搭建的FRPS客户端，通过tcp内网穿透，达到外网随时随地可以访问树莓派。这样在多种环境下，只要保证树莓派有网络连接，都可以直接进行控制台控制或者进行代码编程。教程地址可见本人博客 https://jungleshi.cn/index.php/archives/15/
-[Unit]
-Description=frpc
-Wants=network-online.target
-After=network.target network-online.target
-Requires=network-online.target
-
-[Service]
-TimeoutStartSec=10
-Restart=always
-StartLimitInterval=0
-ExecStart=/etc/frp/frpc -c /etc/frp/frpc.ini
-ExecStop=/bin/kill $MAINPID
-
-[Install]
-WantedBy=multi-user.target
+###### 注意： 树莓派若使用wifi或者pppoe进行联网，设置systemctl自启动会出现开机无法连接frp的情况，请使用上方github库中的frpc.service
 
 
 ## ROS Bridge
