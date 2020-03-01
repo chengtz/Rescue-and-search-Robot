@@ -5,8 +5,14 @@
 
 ## ROS环境安装
 ###### 树莓派集成ROS环境的Ubuntu mate16.04镜像下载：https://github.com/AtsushiSaito/Ubuntu16.04_for_RaspberryPi/releases
-##### 注意：使用ubuntu18.04或者raspberry系统，使用的是melodic版本的ROS环境，需要将所有Kinetic替换成melodic
-#####       如果使用Ubuntu16.04，树莓派会出现彩虹屏问题，可以用官方的raspi镜像boot分区覆盖除cmdline.txt以外文件。
+###### 安装好系统后，换国内源，下载github上turtlebot3源码，进行编译。
+##### 注意：1.使用ubuntu18.04或者raspberry系统，使用的是melodic版本的ROS环境，需要将所有Kinetic替换成melodic
+#####       2.如果使用Ubuntu16.04，树莓派会出现彩虹屏问题，可以用官方的raspi镜像boot分区覆盖除cmdline.txt以外文件。
+#####       3.Turtlebot3 使用需要加入环境变量 
+    echo "export TURTLEBOT3_MODEL=型号" >> ~/.bashrc  
+    source ~/.bashrc
+    env | grep TURTLEBOT3   检查，环境变量是否正确，否则每次都需要声明模型
+
 
 ## HC-SR501红外传感器
 #### 三个引脚和电位器未标注，下面方向都是引脚靠近自己：
@@ -20,6 +26,7 @@
 ###### 2. GND：接电源负极
 ###### 3. DO：TTL高低电平输出端   程序中接36
 ###### 4. AO：模拟电压输出端 （程序中没有使用，只用了高低电平判断）
+###### 电位器顺时针灵敏度调节，可以使用打火机吹灭后测试传感器是否正常。
 
 ## 机器人FRP内网穿透
 ###### 机器人必须实时进行监测和控制，而很多情况下获取机器人IP必须进入路由器管理界面，或者插上显示器，所以采用FRP内网穿透，保证通信畅通。
