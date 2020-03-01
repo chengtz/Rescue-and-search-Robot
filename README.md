@@ -49,7 +49,7 @@
     $ cd ~/catkin_ws
     $ rosdep install --from-paths src -i -y
     $ catkin_make
-##### Gazebo仿真：（拥有物理效果并且有复杂的空间）
+##### Gazebo仿真：（拥有物理效果并且有复杂的空间）第一次启动挂好代理
     roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
     roslaunch turtlebot3_gazebo turtlebot3_world.launch
     roslaunch turtlebot3_gazebo turtlebot3_house.launch
@@ -58,3 +58,11 @@
     roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch //键盘控制
     roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping  //启动slam
     rosrun map_server map_saver -f ~/map                 //保存地图
+
+###### Gazebo仿真手动下载模型：
+    $ cd ~/.gazebo/
+    $ mkdir -p models
+    $ cd ~/.gazebo/models/
+    $ wget http://file.ncnynl.com/ros/gazebo_models.txt
+    $ wget -i gazebo_models.txt
+    $ ls model.tar.g* | xargs -n1 tar xzvf
