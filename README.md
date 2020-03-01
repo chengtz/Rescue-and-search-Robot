@@ -39,4 +39,22 @@
 ###### 作用：  采用Rosbridge采集ros环境下各种参数，和机器人控制台进行实时交流，并且通过rosbridge中的websocket实现对机器人的远程便携式控制。
 
 
-## HTML页面设计
+## 仿真
+##### 编译仿真库：
+    $ mkdir -p ~/catkin_ws/src
+    $ cd ~/catkin_ws/src
+    $ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+    $ git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+    $ git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+    $ cd ~/catkin_ws
+    $ rosdep install --from-paths src -i -y
+    $ catkin_make
+##### Gazebo仿真：（拥有物理效果并且有复杂的空间）
+    roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+    roslaunch turtlebot3_gazebo turtlebot3_world.launch
+    roslaunch turtlebot3_gazebo turtlebot3_house.launch
+    新tty窗口：
+    roslaunch turtlebot3_gazebo turtlebot3_simulation.launch  //启动gazebo
+    roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch //键盘控制
+    roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping  //启动slam
+    rosrun map_server map_saver -f ~/map                 //保存地图
