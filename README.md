@@ -12,7 +12,7 @@
     echo "export TURTLEBOT3_MODEL=型号" >> ~/.bashrc  
     source ~/.bashrc
     env | grep TURTLEBOT3   检查，环境变量是否正确，否则每次都需要声明模型
-
+#####       4.部分新机器，需要升级内核，且使用Gnome开源桌面环境，仿真建模会快很多
 
 ## HC-SR501红外传感器
 #### 三个引脚和电位器未标注，下面方向都是引脚靠近自己：
