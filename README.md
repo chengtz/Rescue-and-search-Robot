@@ -38,7 +38,18 @@
 ###### Rosbridge为非ROS程序提供了一个使用ROS功能的JSON API。 有许多前端与rosbridge接口，包括一个WebSocket服务器，用于Web浏览器进行交互。Rosbridge_suite是一个包含rosbridge的元包，rosbridge的各种前端包，像一个WebSocket包和帮助包。
 ###### 作用：  采用Rosbridge采集ros环境下各种参数，和机器人控制台进行实时交流，并且通过rosbridge中的websocket实现对机器人的远程便携式控制。
 
-
+## Roslibpy
+###### roslibpy是ros支持python的环境库，可以让自己的python程序快速便捷的加入ROS的消息订阅节点中，方便在ROS系统下运行我们自己的Python程序
+###### 安装方法：
+    python -m pip install --upgrade pip  //升级Pip
+    pip install roslibpy  //安装库
+    
+    import roslibpy  //基础例子
+    client = roslibpy.Ros(host='localhost', port=9090)
+    client.run()
+    print('Is ROS connected?', client.is_connected)
+    client.terminate()
+    
 ## 仿真
 ##### 编译仿真库：
     $ mkdir -p ~/catkin_ws/src
