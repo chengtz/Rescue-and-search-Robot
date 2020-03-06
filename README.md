@@ -35,7 +35,7 @@
        scripts/your_scripts.py 
        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
        )
-###### 编译，rosrun运行
+###### catkin_make写入节点，rosrun运行
 
 ## 机器人FRP内网穿透
 ###### 机器人必须实时进行监测和控制，而很多情况下获取机器人IP必须进入路由器管理界面，或者插上显示器，所以采用FRP内网穿透，保证通信畅通。
