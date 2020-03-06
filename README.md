@@ -28,11 +28,19 @@
 ###### 4. AO：模拟电压输出端 （程序中没有使用，只用了高低电平判断）
 ###### 电位器顺时针灵敏度调节，可以使用打火机吹灭后测试传感器是否正常。
 
+## ROS节点添加传感器程序
+###### 传感器采用python程序，使用ROS的rospy依赖库，创建好程序包，移入scripts文件夹
+###### Cmakelist添加以下声明：
+       install(PROGRAMS 
+       scripts/your_scripts.py 
+       DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+       )
+###### 编译，rosrun运行
+
 ## 机器人FRP内网穿透
 ###### 机器人必须实时进行监测和控制，而很多情况下获取机器人IP必须进入路由器管理界面，或者插上显示器，所以采用FRP内网穿透，保证通信畅通。
 ###### 采用了阿里云学生机平台搭建的FRPS客户端，通过tcp内网穿透，达到外网随时随地可以访问树莓派。这样在多种环境下，只要保证树莓派有网络连接，都可以直接进行控制台控制或者进行代码编程。教程地址可见本人博客 https://jungleshi.cn/index.php/archives/15/
 ###### 注意： 树莓派若使用wifi或者pppoe进行联网，设置systemctl自启动会出现开机无法连接frp的情况，请使用上方github库中的frpc.service
-
 
 ## ROS Bridge
 ###### Rosbridge为非ROS程序提供了一个使用ROS功能的JSON API。 有许多前端与rosbridge接口，包括一个WebSocket服务器，用于Web浏览器进行交互。Rosbridge_suite是一个包含rosbridge的元包，rosbridge的各种前端包，像一个WebSocket包和帮助包。
