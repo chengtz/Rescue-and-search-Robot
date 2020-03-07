@@ -5,14 +5,16 @@
 
 ## ROS环境安装
 ###### 树莓派集成ROS环境的Ubuntu mate16.04镜像下载：https://github.com/AtsushiSaito/Ubuntu16.04_for_RaspberryPi/releases
-###### 安装好系统后，换国内源，下载github上turtlebot3源码，进行编译。
-##### 注意：1.使用ubuntu18.04或者raspberry系统，使用的是melodic版本的ROS环境，需要将所有Kinetic替换成melodic
+###### 安装好系统后，换国内源，下载turtlebot3或者其他机器人源码，进行编译。
+##### 注意：1.使用最新ubuntu18.04或者raspberry系统的，使用的是melodic版本的ROS环境，需要将本文档所有Kinetic替换成melodic
 #####       2.如果使用Ubuntu16.04，树莓派会出现彩虹屏问题，可以用官方的raspi镜像boot分区覆盖除cmdline.txt以外文件。
 #####       3.Turtlebot3 使用需要加入环境变量 
-    echo "export TURTLEBOT3_MODEL=型号" >> ~/.bashrc  
+    echo "export TURTLEBOT3_MODEL=型号" >> ~/.bashrc   //设置好这里后以后就不用再一次次声明参数
+    env | grep TURTLEBOT3   检查，环境变量是否正确
+    source ~/catkin_ws/devel/setup.sh  //设置好这里后安装软件包不用再一次次声明
     source ~/.bashrc
-    env | grep TURTLEBOT3   检查，环境变量是否正确，否则每次都需要声明模型
-#####       4.部分新机器，需要升级内核，且使用Gnome开源桌面环境，仿真建模会快很多
+    
+#####       4.部分新机器，需要升级内核，并且安装Gnome开源桌面环境，仿真建模会快很多
 
 ## HC-SR501红外传感器
 #### 三个引脚和电位器未标注，下面方向都是引脚靠近自己：
@@ -38,6 +40,31 @@
        )
 ###### catkin_make写入节点，rosrun运行
 
+## 视觉设备
+###### 首先本地摄像头流获取
+      sudo apt-get install ros-kinetic-uvc-camera
+      roscd uvc_camera
+      sudo mkdir launch
+      cd launch
+      sudo nano camera_node.launch
+      编辑入以下内容：
+      <launch>
+      <node pkg="uvc_camera" type="uvc_camera_node" name="uvc_camera" output="screen">
+        <param name="width" type="int" value="1280" />
+        <param name="height" type="int" value="720" />
+        <param name="fps" type="int" value="30" />
+        <param name="frame" type="string" value="wide_stereo" />
+        <param name="auto_focus" type="bool" value="False" />
+        <param name="focus_absolute" type="int" value="0" />
+        <!-- other supported params: auto_exposure, exposure_absolute, brightness, power_line_frequency -->
+
+        <param name="device" type="string" value="/dev/video0" />
+        <param name="camera_info_url" type="string" value="file://$(find uvc_camera)/example.yaml" />
+      </node>
+      </launch>
+###### 摄像头web_video_server安装,这个教程很多，注意一定要先安装UVC获取本地流！
+###### 因为采用双目摄像头，单目720p已经达到15Mbit带宽，双目需要达到30Mbit带宽，局域网可以跑，但是本项目采用的是云端控制，导致延迟升高，所以采用流压缩处理。
+      
 ## 机器人FRP内网穿透
 ###### 机器人必须实时进行监测和控制，而很多情况下获取机器人IP必须进入路由器管理界面，或者插上显示器，所以采用FRP内网穿透，保证通信畅通。
 ###### 采用了阿里云学生机平台搭建的FRPS客户端，通过tcp内网穿透，达到外网随时随地可以访问树莓派。这样在多种环境下，只要保证树莓派有网络连接，都可以直接进行控制台控制或者进行代码编程。教程地址可见本人博客 https://jungleshi.cn/index.php/archives/15/
@@ -87,9 +114,11 @@
     $ wget -i gazebo_models.txt
     $ ls model.tar.g* | xargs -n1 tar xzvf
     
-## 控制台运行
+## 控制台
 ##### ROS端：
     roslaunch rosbridge_server rosbridge_websocket.launch
+    roslaunch uvc_video camera_node.launch  
+    roslaunch web_video_server web_video.launch
     rosrun sense yanwu.py
     rosrun sense redsense.py
 ##### WEB端：
