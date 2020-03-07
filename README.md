@@ -86,3 +86,21 @@
     $ wget http://file.ncnynl.com/ros/gazebo_models.txt
     $ wget -i gazebo_models.txt
     $ ls model.tar.g* | xargs -n1 tar xzvf
+    
+## 控制台运行
+##### ROS端：
+    roslaunch rosbridge_server rosbridge_websocket.launch
+    rosrun sense yanwu.py
+    rosrun sense redsense.py
+##### WEB端：
+          var listener2 = new ROSLIB.Topic({
+          ros : rbServer,
+          name : '/X',
+          messageType : 'std_msgs/String'
+          });
+          listener2.subscribe(function(message) {
+          document.getElementById("ID").innerHTML = message.data;
+          console.log('X：' + message.data);
+          });
+    
+
