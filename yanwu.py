@@ -1,5 +1,3 @@
-  GNU nano 2.5.3                                         File: publisher.py                                                                                         
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
  
