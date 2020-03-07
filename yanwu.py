@@ -1,10 +1,7 @@
   GNU nano 2.5.3                                         File: publisher.py                                                                                         
 
 #!/usr/bin/env python
-# BEGIN ALL
-# BEGIN SHEBANG
-#!/usr/bin/env python
-# END SHEBANG
+# -*- coding: utf-8 -*-
  
 # BEGIN IMPORT
 import rospy
@@ -13,27 +10,37 @@ import time
 # END IMPORT
  
 # BEGIN STD_MSGS
-from std_msgs.msg import Int16
+from std_msgs.msg import String
 # END STD_MSGS
 CHANNEL=36
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(CHANNEL,GPIO.IN,pull_up_down=GPIO.PUD_DOWN) 
-yanwu=GPIO.input(CHANNEL)
+GPIO.setup(CHANNEL,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+
 #GPIO.input(CHANNEL)
- 
+
 rospy.init_node('sense')
- 
+
 # BEGIN PUB
-pub = rospy.Publisher('yanwu', Int16)
+pub = rospy.Publisher('yanwu', String)
 # END PUB
  
 # BEGIN LOOP
-rate = rospy.Rate(10)
- 
-#count = 0
-while not rospy.is_shutdown():
-    pub.publish(yanwu)
-    rate.sleep()
-# END LOOP
-# END ALL
+rate = rospy.Rate(1)
 
+#count = 0
+
+
+try:
+         while True:
+          status=GPIO.input(CHANNEL)
+          if status == True:
+                        print ( ' 正常 ' )
+                        yanwu = '当前有害气体正常'
+                        pub.publish(yanwu)
+          else:
+                        print ( '检测到有害气体！！！' )
+                        yanwu = '检测到有害气体！！！'
+                        pub.publish(yanwu)
+          time.sleep(1)
+except KeyboardInterrupt:
+            GPIO.cleanup()
