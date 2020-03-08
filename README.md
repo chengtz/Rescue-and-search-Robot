@@ -1,7 +1,7 @@
 # 搜索救援机器人项目组 WIKI
 ## 本库收录项目关键部分和出现问题部分，非整库和安装教学
 ## 项目介绍
-###### Turtlebot3-Wiffle-pi，是金科实验室的大号机器车，Opencv控制雷达，电机，以及供电，树莓派负责ros程序以及对opencv的程序控制。本项目是Jungle的毕业设计。标题是搜索救援机器人的研究。将利用Turtlebot3平台，加入多个搜索救援用到的传感器（红外摄像，双目视觉，有害气体检测），以及设计一个搜索救援控制台（websocket+python）。
+###### 基于Turtlebot3-Wiffle-pi，Opencv控制激光雷达，电机，以及供电，树莓派负责ros程序以及对opencv的程序控制。本项目是Jungle的毕业设计。标题是搜索救援机器人的研究。将利用Turtlebot3平台，加入多个搜索救援用到的传感器（红外摄像，双目视觉，有害气体检测），以及设计一个搜索救援控制台（websocket+python）。
 
 ## ROS环境安装
 ###### 树莓派集成ROS环境的Ubuntu mate16.04镜像下载：https://github.com/AtsushiSaito/Ubuntu16.04_for_RaspberryPi/releases
