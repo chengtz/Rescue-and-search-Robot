@@ -117,7 +117,7 @@
 ## 控制台
 ##### ROS端：
     roslaunch rosbridge_server rosbridge_websocket.launch
-    roslaunch uvc_video camera_node.launch  
+    rosrun uvc_camera uvc_camera_node 
     roslaunch web_video_server web_video.launch
     rosrun sense yanwu.py
     rosrun sense redsense.py
