@@ -132,4 +132,42 @@
           console.log('X：' + message.data);
           });
     
+## 视觉处理
+##### 采用Openpose项目，可识别人体结构、脸部特征
+安装步骤：
+1.准备：Openpose release   openpose_caffe_models   CUAD9.2 cudnn-9.2  
+2.安装完毕，cmd启动 bin\OpenPoseDemo --
 
+--face: 开启 Face 关键点检测.
+
+--hand: 开启 Hand 关键点检测
+
+--video input.mp4: 读取 Video.
+
+--camera 3: 读取 webcam number 3.
+
+--image_dir path_to_images/: 运行图像路径内的图片.
+
+--ip_camera http://iris.not.iac.es/axis-cgi/mjpg/video.cgi?resolution=320x240?x.mjpeg: 在 streamed IP camera 上运行. 参考public IP cameras 例子.
+
+--write_video path.avi: 将处理后的图片保存为 Video.
+
+--write_images folder_path: 将处理后的图片保存到指定路径.
+
+--write_keypoint path/: 在指定路径输出包含人体姿态数据的 JSON, XML 或 YML 文件.
+
+--process_real_time: 对于视频，可能在实时运行时，跳过某些视频帧.
+
+--disable_blending: 如果 --disable_blending=True，则在很色背景上渲染估计结果(如 keypoints skeletons 和 heatmaps)，而不显示原始图像. Related: part_to_show, alpha_pose, and alpha_pose.
+
+--part_to_show: 可视化的预测通道(Prediction channel).
+
+--display 0: 不打开可视化显示窗口. 对于服务器部署和 OpenPose 加速很帮助.
+
+--num_gpu 2 --num_gpu_start 1: 多 GPUs 时，设置开始的 GPU id. 默认使用所有可用的 GPUs.
+
+--model_pose MPI: 采用的模型Model，影响 Keypoints 的数量、运行速度和精度.
+
+--logging_level 3: Logging messages threshold, range [0,255]: 0 - 输出所有信息e & 255 - 不输出任何信息. Current messages in the range [1-4], 1 for low priority messages and 4 for important ones.
+
+保存：bin\OpenPoseDemo.exe --image_dir examples/media/ --write_images examples/media_out/
